@@ -64,6 +64,51 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Designated-Initializers" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/04/26/Designated-Initializers/" class="article-date">
+  <time datetime="2016-04-26T10:18:50.000Z" itemprop="datePublished">2016-04-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/26/Designated-Initializers/">Designated Initializers</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Objective-C<br>一个对象可以有多个构造方法</p>
+<p>指定构造器(Designated Initializers)<br>必须调用父类的指定构造器</p>
+<p>便利构造器(Convenience Initializers)<br>必须调用指定构造器</p>
+<p>iOS8后在指定构造器后添加宏｀NS_DESIGNATED_INITIALIZER｀，跟编译器指明哪个是指定构造器</p>
+<p>Profile.h</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#import &lt;Foundation/Foundation.h&gt;</span><br><span class="line"></span><br><span class="line">@interface Profile : NSObject</span><br><span class="line"></span><br><span class="line">@property (nonatomic, copy) NSString *name;</span><br><span class="line"></span><br><span class="line">- (instancetype)init;</span><br><span class="line"></span><br><span class="line">- (instancetype)initWithName:(NSString *)name NS_DESIGNATED_INITIALIZER;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<p>Profile.m</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">#import &quot;Profile.h&quot;</span><br><span class="line"></span><br><span class="line">@implementation Profile</span><br><span class="line"></span><br><span class="line">- (instancetype)init &#123;</span><br><span class="line">    // 必须调用指定构造器</span><br><span class="line">    return [self initWithName:@&quot;Unknown&quot;];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (instancetype)initWithName:(NSString *)name &#123;</span><br><span class="line">    // 必须调用父类的指定构造器</span><br><span class="line">    self = [super init];</span><br><span class="line">    if (self) &#123;</span><br><span class="line">        _name = [name copy];</span><br><span class="line">    &#125;</span><br><span class="line">    return self;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<p>参考：<br><a href="http://useyourloaf.com/blog/xcode-6-objective-c-modernization/" target="_blank" rel="external">http://useyourloaf.com/blog/xcode-6-objective-c-modernization/</a><br><a href="http://stackoverflow.com/questions/26185239/ios-designated-initializers-using-ns-designated-initializer" target="_blank" rel="external">http://stackoverflow.com/questions/26185239/ios-designated-initializers-using-ns-designated-initializer</a><br><a href="http://honglu.me/2015/09/16/Objective-C%E5%BE%88%E6%9C%89%E7%94%A8%E7%9A%84%E7%89%B9%E6%80%A7/" target="_blank" rel="external">http://honglu.me/2015/09/16/Objective-C%E5%BE%88%E6%9C%89%E7%94%A8%E7%9A%84%E7%89%B9%E6%80%A7/</a><br><a href="http://www.starfelix.com/blog/2014/04/13/zheng-que-bian-xie-designated-initializerde-ji-ge-yuan-ze/" target="_blank" rel="external">http://www.starfelix.com/blog/2014/04/13/zheng-que-bian-xie-designated-initializerde-ji-ge-yuan-ze/</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/04/26/Designated-Initializers/" data-id="cinha6ie60001qxddswdjpgex" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-CollectionView动态居中显示解析" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/04/15/CollectionView动态居中显示解析/" class="article-date">
@@ -101,7 +146,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/04/15/CollectionView动态居中显示解析/" data-id="cin1ig69e000124dd2fzp1b6u" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/04/15/CollectionView动态居中显示解析/" data-id="cinha6iel0002qxdddbc8qao7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -139,6 +184,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/04/26/Designated-Initializers/">Designated Initializers</a>
+          </li>
         
           <li>
             <a href="/2016/04/15/CollectionView动态居中显示解析/">CollectionView动态居中显示解析</a>
